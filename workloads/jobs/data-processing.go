@@ -8,7 +8,7 @@ import (
 
 func main() {
 	fmt.Printf("Data processing job started at %v...\n", time.Now())
-	for task := 1; task <= 5; task++ {
+	for task := 1; task <= 10; task++ {
 		processTask(task)
 	}
 	fmt.Printf("Data processing job completed at %v\n", time.Now())

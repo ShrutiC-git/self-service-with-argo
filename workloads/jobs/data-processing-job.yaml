@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job 
+metadata: 
+  name: data-processing-job
+spec: 
+  template:
+    spec:
+      containers:
+        - name: data-processor
+          image: k18sc01/data-processing-job:v1
+      restartPolicy: OnFailure
+  backoffLimit: 2
+  # Automatically clean up the job 100 seconds after it completes.
+  ttlSecondsAfterFinished: 100

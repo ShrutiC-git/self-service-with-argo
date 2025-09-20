@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: data-processor
-          image: k18sc01/data-processing-job:v1
+          image: k18sc01/data-processing-job:latest
       restartPolicy: OnFailure
   backoffLimit: 2
   # Automatically clean up the job 100 seconds after it completes.

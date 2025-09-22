@@ -1,0 +1,67 @@
+apiVersion: apps/v1 
+kind: StatefulSet
+metadata: 
+  name: rabbitmq
+  namespace: messaging # created by Terraform
+  labels: 
+    app: rabbitmq
+spec: 
+  serviceName: "rabbitmq" # Headless service for stable network IDs
+  replicas: 1 # Start with 1 for a simple setup. Can be scaled for a clustered setup.
+  selector: 
+    matchLabels:
+      app: rabbitmq
+  template: 
+    metadata: 
+      labels:
+        app: rabbitmq
+    spec: 
+      # In a real scenario, you would create and use a dedicated service account
+      # serviceAccountName: messaging-sa 
+      containers: 
+      - name: rabbitmq
+        image: rabbitmq:3-management
+        ports: 
+        - containerPort: 5672 # AMQP
+        - containerPort: 15672 # UI
+        volumeMounts:
+        - name: rabbitmq-data
+          mountPath: /var/lib/rabbitmq
+        env: 
+        - name: RABBITMQ_DEFAULT_USER
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-secret # Reference the secret created by Terraform
+              key: RABBITMQ_DEFAULT_USER
+        - name: RABBITMQ_DEFAULT_PASS
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-secret
+              key: RABBITMQ_DEFAULT_PASS
+  # Define a persistent volume claim template.
+  # This will create a new PersistentVolume for each pod.
+  volumeClaimTemplates:
+  - metadata:
+      name: rabbitmq-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 4Gi # Request 4 Gibibytes of storage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq
+  namespace: messaging
+spec:
+  # clusterIP: None # Uncomment for a headless service if using a multi-node cluster
+  selector:
+    app: rabbitmq
+  ports:
+  - name: amqp
+    port: 5672
+    targetPort: 5672
+  - name: management
+    port: 15672
+    targetPort: 15672

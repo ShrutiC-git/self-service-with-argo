@@ -7,14 +7,8 @@ variable "kubeconfig_path" {
 variable "namespaces" {
   description = "A map of namespace configurations. Each key is a logical name for the namespace."
   type = map(object({
-    name  = string
-    quota = optional(object({
-      "pods"            = optional(string)
-      "requests.cpu"    = optional(string)
-      "requests.memory" = optional(string)
-      "limits.cpu"      = optional(string)
-      "limits.memory"   = optional(string)
-    }))
+    name = string
+    quota = optional(map(string))
     rbac = optional(object({
       service_account_name = string
       role_name            = string
@@ -37,11 +31,11 @@ variable "namespaces" {
           verbs      = ["get", "list", "watch", "create", "update", "patch", "delete"]
         }]
       }
-     },
+    },
     "ai-jobs" = {
-      name  = "ai-jobs"
+      name = "ai-jobs"
       quota = {
-        pods            = "10",
+        pods              = "10",
         "requests.cpu"    = "2",
         "requests.memory" = "4Gi",
         "limits.cpu"      = "4",
@@ -56,8 +50,8 @@ variable "namespaces" {
           verbs      = ["get", "list", "watch", "create", "update", "patch", "delete"]
         }]
       }
-     },
-    "messaging" = { name = "messaging"} ,
+    },
+    "messaging" = { name = "messaging" },
     "data"      = { name = "data" }
   }
 }

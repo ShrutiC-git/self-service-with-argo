@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1aplha1
+kind: ApplicationSet
+metadata: {
+  name: jobs,
+  namespace: argocd
+}
+spec: 
+  generators: 
+  - git: 
+      repoURL: https://github.com/ShrutiC-git/microservice-with-argo.git
+      revision: main 
+      directories: [
+        {
+          path: "workloads/jobs/*"
+        }
+      ]
+  template: 
+    metadata: {
+      name: "job-{{path.basename}}",
+      namespace: argocd
+    }
+    spec: 
+      project: default
+      source: 
+        repoURL: https://github.com/ShrutiC-git/microservice-with-argo.git
+        targetRevision: main
+        path: "workloads/jobs/{{path.basename}}"
+      destination: 
+        server: https://kubernetes.default.svc
+        namespace: jobs
+      syncPolicy: 
+        automated: 
+          prune: true
+          selfHeal: true

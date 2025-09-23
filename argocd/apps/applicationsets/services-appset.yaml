@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata: { name: services, namespace: argocd }
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/ShrutiC-git/microservice-with-argo.git
+        revision: main
+        directories: [ { path: "workloads/services/*" } ]
+  template:
+    metadata: { name: "svc-{{path.basename}}", namespace: argocd }
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/ShrutiC-git/microservice-with-argo.git
+        targetRevision: main
+        path: "workloads/services/{{path.basename}}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: services
+      syncPolicy: { automated: { prune: true, selfHeal: true } }

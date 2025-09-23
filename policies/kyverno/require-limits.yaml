@@ -1,0 +1,41 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata: 
+  name: require-limits
+spec: 
+  validationFailureAction: enforce
+  background: true
+  rules: 
+  - name: check-limits
+    match: 
+      resources: 
+        any:
+        - kinds:
+          - Pod
+        - kinds:
+          - Deployment
+          - StatefulSet
+          - DaemonSet
+          - Job
+    validate: 
+      message: "Pod declarations must include limits and requests."
+      pattern: 
+        spec: 
+          (template):
+            spec:
+              +(initContainers):
+              - resources:
+                  requests:
+                    memory: "?*"
+                    cpu: "?*"
+                  limits:
+                    memory: "?*"
+                    cpu: "?*"
+              containers:
+              - resources:
+                  requests:
+                    memory: "?*"
+                    cpu: "?*"
+                  limits:
+                    memory: "?*"
+                    cpu: "?*"

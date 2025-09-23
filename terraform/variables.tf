@@ -51,6 +51,7 @@ variable "namespaces" {
         }]
       }
     },
+    "kyverno"   = { name = "kyverno" },
     "messaging" = { name = "messaging" },
     "data"      = { name = "data" }
   }

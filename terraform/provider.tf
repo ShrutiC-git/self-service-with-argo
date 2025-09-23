@@ -14,13 +14,11 @@ terraform {
 
 provider "kubernetes" {
   config_path    = pathexpand("~/.kube/config")
-  config_context = "kind-self-service"
 }
 
 provider "helm" {
   kubernetes {
     config_path    = pathexpand("~/.kube/config")
-    config_context = "kind-self-service"
   }
 }
 

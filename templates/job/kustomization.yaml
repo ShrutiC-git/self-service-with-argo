@@ -1,0 +1,6 @@
+resources:
+  - job.yaml
+images:
+  - name: placeholder
+    newName: __IMAGE_NAME__
+    newTag: __IMAGE_TAG__

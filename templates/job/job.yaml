@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata: { name: __NAME__ } # Corrected metadata syntax
+spec:
+  template:
+    spec:
+      serviceAccountName: ai-sa # This should match the SA created by Terraform for the ai-jobs namespace
+      restartPolicy: Never
+      containers:
+      - name: __NAME__
+        image: placeholder
+        resources: { # This block is required by your Kyverno policy
+            requests: {
+                memory: __MEMORY_REQUEST__,
+                cpu: __CPU_REQUEST__
+            },
+            limits: {
+                memory: __MEMORY_LIMIT__,
+                cpu: __CPU_LIMIT__
+            }
+        }
+        env:
+        - { name: RABBITMQ_HOST, value: rabbitmq.messaging.svc.cluster.local }
+        volumeMounts:
+        - { name: artifacts, mountPath: /artifacts }
+      volumes:
+      - name: artifacts
+        persistentVolumeClaim: { claimName: model-artifacts }

@@ -1,0 +1,8 @@
+resources:
+  - deployment.yaml
+  - service.yaml
+
+images:
+  - name: placeholder # This MUST match the image name in deployment.yaml
+    newName: __IMAGE_NAME__ # Placeholder for the image name (e.g., my-org/my-app)
+    newTag: __IMAGE_TAG__ # Placeholder for the image tag (e.g., v1.2.3)

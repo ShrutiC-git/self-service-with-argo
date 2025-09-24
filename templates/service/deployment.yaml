@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: {
+    name: __NAME__,
+    labels: {
+        app: __NAME__
+    }
+}
+spec: 
+    replicas: 2
+    selector: {
+        matchLabels: {
+            app: __NAME__
+        }
+    }
+    template: 
+        metadata: {
+            labels: {
+                app: __NAME__
+            }
+        }
+        spec: 
+            serviceAccountName: dev-sa
+            containers: 
+            -   name: __NAME__
+                image: placeholder # Use a stable, generic placeholder
+                ports: [
+                    {
+                        containerPort: __PORT__
+                    }
+                ]
+                resources: {
+                    requests: {
+                        memory: __MEMORY_REQUEST__,
+                        cpu: __CPU_REQUEST__
+                    },
+                    limits: {
+                        memory: __MEMORY_LIMIT__,
+                        cpu: __CPU_LIMIT__
+                    }
+                }
+                env: 
+                - {
+                    name: RABBITMQ_HOST,
+                    value: rabbitmq.messaging.svc.cluster.local
+                }
+    

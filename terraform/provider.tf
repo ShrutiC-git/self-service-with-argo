@@ -21,4 +21,3 @@ provider "helm" {
     config_path    = pathexpand("~/.kube/config")
   }
 }
-

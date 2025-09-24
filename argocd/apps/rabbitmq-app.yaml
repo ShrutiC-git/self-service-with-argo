@@ -6,7 +6,7 @@ metadata:
 spec: 
   project: default 
   source: 
-    repoURL: https://github.com/ShrutiC-git/microservice-with-argo.git
+    repoURL: https://github.com/ShrutiC-git/self-service-with-argo.git
     targetRevision: main
     path: workloads/messaging
   destination: 

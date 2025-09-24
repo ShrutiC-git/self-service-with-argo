@@ -31,12 +31,12 @@ spec:
                 ]
                 resources: {
                     requests: {
-                        memory: __MEMORY_REQUEST__,
-                        cpu: __CPU_REQUEST__
+                        memory: 64Mi,
+                        cpu: 50m
                     },
                     limits: {
-                        memory: __MEMORY_LIMIT__,
-                        cpu: __CPU_LIMIT__
+                        memory: 128Mi,
+                        cpu: 100m
                     }
                 }
                 env: 

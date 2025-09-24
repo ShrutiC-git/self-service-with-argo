@@ -4,7 +4,7 @@ metadata: { name: services, namespace: argocd }
 spec:
   generators:
     - git:
-        repoURL: https://github.com/ShrutiC-git/microservice-with-argo.git
+        repoURL: https://github.com/ShrutiC-git/self-service-with-argo.git
         revision: main
         directories: [ { path: "workloads/services/*" } ]
   template:
@@ -12,7 +12,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/ShrutiC-git/microservice-with-argo.git
+        repoURL: https://github.com/ShrutiC-git/self-service-with-argo.git
         targetRevision: main
         path: "workloads/services/{{path.basename}}"
       destination:

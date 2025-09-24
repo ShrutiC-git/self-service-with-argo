@@ -7,7 +7,7 @@ metadata: {
 spec: 
   generators: 
   - git: 
-      repoURL: https://github.com/ShrutiC-git/microservice-with-argo.git
+      repoURL: https://github.com/ShrutiC-git/self-service-with-argo.git
       revision: main 
       directories: [
         {
@@ -22,7 +22,7 @@ spec:
     spec: 
       project: default
       source: 
-        repoURL: https://github.com/ShrutiC-git/microservice-with-argo.git
+        repoURL: https://github.com/ShrutiC-git/self-service-with-argo.git
         targetRevision: main
         path: "workloads/jobs/{{path.basename}}"
       destination: 

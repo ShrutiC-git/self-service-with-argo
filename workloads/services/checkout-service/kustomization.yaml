@@ -1,0 +1,10 @@
+resources:
+- deployment.yaml
+- service.yaml
+
+images:
+- name: placeholder
+  newName: docker.io/k18sc01/checkout-service
+  newTag: ee77766248cfb3d64f95e232b54adc7901125a91
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization

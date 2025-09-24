@@ -5,9 +5,11 @@ resource "random_password" "rabbitmq_password" {
 }
 
 resource "kubernetes_secret" "rabbitmq_secret" {
+  for_each = { for k, v in var.namespaces : k => v if contains(["messaging", "services", "ai-jobs"], k) }
+
   metadata {
     name      = "rabbitmq-secret"
-    namespace = kubernetes_namespace.ns["messaging"].metadata[0].name
+    namespace = each.value.name
   }
 
   data = {

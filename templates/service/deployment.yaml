@@ -39,9 +39,12 @@ spec:
                         cpu: 100m
                     }
                 }
-                env: 
-                - {
-                    name: RABBITMQ_HOST,
-                    value: rabbitmq.messaging.svc.cluster.local
-                }
+                env:
+                - name: RABBITMQ_HOST
+                  value: rabbitmq.messaging.svc.cluster.local
+                - name: RABBITMQ_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: rabbitmq-secret
+                      key: RABBITMQ_DEFAULT_PASS
     

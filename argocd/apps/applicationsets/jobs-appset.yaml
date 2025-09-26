@@ -27,7 +27,7 @@ spec:
         path: "workloads/jobs/{{path.basename}}"
       destination: 
         server: https://kubernetes.default.svc
-        namespace: jobs
+        namespace: ai-jobs
       syncPolicy: 
         automated: 
           prune: true

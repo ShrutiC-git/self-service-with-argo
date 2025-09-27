@@ -1,59 +1,47 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: {
-    name: __NAME__,
-    labels: {
+metadata:
+  name: __NAME__
+  labels:
+    app: __NAME__
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: __NAME__
+  template:
+    metadata:
+      labels:
         app: __NAME__
-    }
-}
-spec: 
-    replicas: 2
-    selector: {
-        matchLabels: {
-            app: __NAME__
-        }
-    }
-    template: 
-        metadata: {
-            labels: {
-                app: __NAME__
-            }
-        }
-        spec: 
-            serviceAccountName: dev-sa
-            containers: 
-            -   name: __NAME__
-                image: placeholder # Use a stable, generic placeholder
-                ports: [
-                    {
-                        containerPort: __PORT__
-                    }
-                ]
-                resources: {
-                    requests: {
-                        memory: 64Mi,
-                        cpu: 50m
-                    },
-                    limits: {
-                        memory: 128Mi,
-                        cpu: 100m
-                    }
-                }
-                env:
-                - name: RABBITMQ_HOST
-                value: rabbitmq.messaging.svc.cluster.local
-                - name: RABBITMQ_PASSWORD
-                valueFrom:
-                    secretKeyRef:
-                        name: rabbitmq-secret
-                        key: RABBITMQ_DEFAULT_PASS
-                - name: MINIO_ACCESS_KEY
-                valueFrom:
-                    secretKeyRef:
-                    name: minio-secret
-                    key: MINIO_ACCESS_KEY
-                - name: MINIO_SECRET_KEY
-                valueFrom:
-                    secretKeyRef:
-                    name: minio-secret
-                    key: MINIO_SECRET_KEY
+    spec:
+      serviceAccountName: dev-sa
+      containers:
+      - name: __NAME__
+        image: placeholder # Use a stable, generic placeholder
+        ports:
+        - containerPort: __PORT__
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 50m
+          limits:
+            memory: 128Mi
+            cpu: 100m
+        env:
+        - name: RABBITMQ_HOST
+          value: rabbitmq.messaging.svc.cluster.local
+        - name: RABBITMQ_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-secret
+              key: RABBITMQ_DEFAULT_PASS
+        - name: MINIO_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio-secret
+              key: MINIO_ACCESS_KEY
+        - name: MINIO_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio-secret
+              key: MINIO_SECRET_KEY

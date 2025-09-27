@@ -1,6 +1,7 @@
 apiVersion: batch/v1
 kind: Job
-metadata: { name: fraud-detection } # Corrected metadata syntax
+metadata:
+  name: fraud-detection
 spec:
   template:
     spec:
@@ -30,5 +31,6 @@ spec:
         volumeMounts:
         - { name: artifacts, mountPath: /artifacts }
       volumes:
-      - name: artifacts
-        persistentVolumeClaim: { claimName: model-artifacts }
+        - name: artifacts
+          persistentVolumeClaim:
+            claimName: model-artifacts

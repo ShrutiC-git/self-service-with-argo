@@ -1,6 +1,6 @@
 # Self-Service, Golden Path for AI/ML and Microservices
 
-Commonly, when we hear of self-service, golden-paths, what comes to mind is GitOps-based approach; platform for backend. This project has been designed to build self-service platform for ML Engineers and application Developers, alike.
+Commonly, when we hear of self-service, golden-paths, what comes to mind is GitOps-based approach - a platform for backend. This project has been designed to build self-service platform for ML Engineers and application Developers, alike.
 With this in place, ML and app teams will not have to worry about provisioning infrastrcutre; applying their K8s manifests each time it changes; managing desired-state with state-of-the cluster; enforcing policies for K8s-resources, like limits for pods.
 This project builds a golden-path for self-service infrastructure, managing both ML/AI jobs and backend services.
 

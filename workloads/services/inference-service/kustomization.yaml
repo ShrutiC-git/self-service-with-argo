@@ -1,0 +1,10 @@
+resources:
+- deployment.yaml
+- service.yaml
+
+images:
+- name: placeholder
+  newName: docker.io/k18sc01/inference-service
+  newTag: 463aca604c09295acd6d53dd0abe0a5013b76954
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization

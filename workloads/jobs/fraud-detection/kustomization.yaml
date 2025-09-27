@@ -1,0 +1,8 @@
+resources:
+- job.yaml
+images:
+- name: placeholder
+  newName: docker.io/k18sc01/fraud-detection
+  newTag: 6138a52b382e31bb559d5c2019160b00ab509b8e
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization

@@ -5,6 +5,6 @@ resources:
 images:
 - name: placeholder
   newName: docker.io/k18sc01/inference-service
-  newTag: 52d8050436ae473a469baf98a022a53fa78e7c81
+  newTag: fc0fb4adfafe599434e6846e37c46e961362f33a
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization

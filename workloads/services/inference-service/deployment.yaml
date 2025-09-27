@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: {
+    name: inference-service,
+    labels: {
+        app: inference-service
+    }
+}
+spec: 
+    replicas: 2
+    selector: {
+        matchLabels: {
+            app: inference-service
+        }
+    }
+    template: 
+        metadata: {
+            labels: {
+                app: inference-service
+            }
+        }
+        spec: 
+            serviceAccountName: dev-sa
+            containers: 
+            -   name: inference-service
+                image: placeholder # Use a stable, generic placeholder
+                ports: [
+                    {
+                        containerPort: 8000
+                    }
+                ]
+                resources: {
+                    requests: {
+                        memory: 64Mi,
+                        cpu: 50m
+                    },
+                    limits: {
+                        memory: 128Mi,
+                        cpu: 100m
+                    }
+                }
+                env:
+                - name: RABBITMQ_HOST
+                    value: rabbitmq.messaging.svc.cluster.local
+                - name: RABBITMQ_PASSWORD
+                    valueFrom:
+                        secretKeyRef:
+                        name: rabbitmq-secret
+                        key: RABBITMQ_DEFAULT_PASS
+                - name: MINIO_ACCESS_KEY
+                    valueFrom:
+                        secretKeyRef:
+                        name: minio-secret
+                        key: MINIO_ACCESS_KEY
+                - name: MINIO_SECRET_KEY
+                    valueFrom:
+                        secretKeyRef:
+                        name: minio-secret
+                        key: MINIO_SECRET_KEY
+    

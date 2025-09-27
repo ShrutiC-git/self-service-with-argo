@@ -30,12 +30,12 @@ spec:
             - name: MINIO_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  name: minio-secrets
+                  name: minio-secret
                   key: MINIO_ACCESS_KEY
             - name: MINIO_SECRET_KEY
               valueFrom:
                 secretKeyRef:
-                  name: minio-secrets
+                  name: minio-secret
                   key: MINIO_SECRET_KEY
         volumeMounts:
         - { name: artifacts, mountPath: /artifacts }

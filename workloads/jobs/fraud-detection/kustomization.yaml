@@ -3,6 +3,6 @@ resources:
 images:
 - name: placeholder
   newName: docker.io/k18sc01/fraud-detection
-  newTag: 4b68802afcc4040c40ab50462044013b807d20ec
+  newTag: 1baebc4b6c4a57e140232f9702a6f119eb70641c
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization

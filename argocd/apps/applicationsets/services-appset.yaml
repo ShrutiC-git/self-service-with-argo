@@ -20,23 +20,3 @@ spec:
         namespace: services
       syncPolicy: { automated: { prune: true, selfHeal: true } }
 
----
-# fraud-inference-app.yaml
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: fraud-inference
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/ShrutiC-git/self-service-with-argo.git
-    targetRevision: main
-    path: workloads/services/inference-service
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: ai-jobs
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true

@@ -41,10 +41,20 @@ spec:
                 }
                 env:
                 - name: RABBITMQ_HOST
-                  value: rabbitmq.messaging.svc.cluster.local
+                    value: rabbitmq.messaging.svc.cluster.local
                 - name: RABBITMQ_PASSWORD
-                  valueFrom:
-                    secretKeyRef:
-                      name: rabbitmq-secret
-                      key: RABBITMQ_DEFAULT_PASS
+                    valueFrom:
+                        secretKeyRef:
+                        name: rabbitmq-secret
+                        key: RABBITMQ_DEFAULT_PASS
+                - name: MINIO_ACCESS_KEY
+                    valueFrom:
+                        secretKeyRef:
+                        name: minio-secrets
+                        key: MINIO_ACCESS_KEY
+                - name: MINIO_SECRET_KEY
+                    valueFrom:
+                        secretKeyRef:
+                        name: minio-secrets
+                        key: MINIO_SECRET_KEY
     

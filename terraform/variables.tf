@@ -20,6 +20,7 @@ variable "namespaces" {
     }))
   }))
   default = {
+    "infra"     = { name = "infra" },
     "services" = {
       name = "services"
       rbac = {

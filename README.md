@@ -60,10 +60,13 @@ The workflow combines Kustomize, GitHub Actions, Terraform, and ArgoCD in a GitO
 
 This ensures that every push flows from code to deployment with no manual intervention.  
 
-## Developer Experience: Fraud Detection Example  
+## Developer Experience: Fraud Detection Example 
+
 To demonstrate the platform, I built an fraud detection workflow, where the backend services are closely integrated with the ML model created by the ML job. 
 
 This is the main repo, where ArgoCD is watching for any pushes to the [workloads/services](https://github.com/ShrutiC-git/self-service-with-argo/tree/main/workloads/services) path and the [workload/jobs](https://github.com/ShrutiC-git/self-service-with-argo/tree/main/workloads/jobs/fraud-detection) path. As soon as any changes are made, ArgoCD, deployed in the K8s cluster, will poll the changes, and sync the state of job/service to match the desired state in the GitOps repo.  
+
+![ArgoCD Workflow](screenshots/argo-home.png)
 
 ### 1. [Checkout Service](https://github.com/ShrutiC-git/go-k8s-service-with-kustomize) (Backend Service)  
 - Written in Go  

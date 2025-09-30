@@ -5,6 +5,6 @@ resources:
 images:
 - name: placeholder
   newName: docker.io/k18sc01/checkout-service
-  newTag: fd2168735d5cbca51b355e434cbfb2049451f345
+  newTag: 3408649fe6c702bddb6925c6bf20052f752086fa
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
